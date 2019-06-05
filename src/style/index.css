@@ -1,0 +1,51 @@
+html, body {
+  background-color: #fefefe; }
+
+.searchCountry {
+  margin-top: 30px; }
+  .searchCountry input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right-color: transparent;
+    box-shadow: none !important; }
+  .searchCountry button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0; }
+
+.ant-spin-spinning {
+  position: relative;
+  display: block;
+  margin: 30px; }
+
+.detail__name {
+  display: flex;
+  align-items: flex-end;
+  margin: 20px 0 25px !important; }
+  .detail__name h1, .detail__name h2 {
+    margin: 0;
+    line-height: 1; }
+  .detail__name h1 {
+    padding-right: 15px; }
+  .detail__name h2 {
+    padding: 0 5px; }
+  .detail__name img {
+    width: 28px;
+    margin-right: 5px; }
+.detail .iterate {
+  margin-right: 10px; }
+.detail > div {
+  margin-bottom: 10px; }
+.detail .label {
+  color: #888; }
+.detail b {
+  margin-left: 5px; }
+  .detail b:after {
+    content: ','; }
+  .detail b:last-child:after {
+    display: none; }
+  .detail b span {
+    color: #888;
+    font-weight: normal;
+    margin-left: -2px; }
+
+/*# sourceMappingURL=index.css.map */

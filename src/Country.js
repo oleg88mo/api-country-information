@@ -1,28 +1,48 @@
-import React from 'react';
+import React, {useState} from 'react';
+// components & style
+import SearchCountry from './components/searchCountry';
+import EmptyDataCountry from './components/emptyDataCountry';
+import CountryDetails from './components/countryDetails';
+import 'antd/dist/antd.css';
+import './style/index.css';
 
-class Country extends React.Component {
-    async componentWillMount() {
-        await this.getApiData();
-    }
+export default function Country() {
+    const [spin, setSpin] = useState();
+    const [country, setCountry] = useState();
+    const [searchCountryName, setSearchCountryName] = useState();
+    const getCountryData = async () => {
+        setSpin(true);
 
-    async getApiData() {
-        let res = await fetch(`https://restcountries.eu/rest/v2/name/ukraine`);
-        let data = await res.json();
-        // console.log(data);
-        if (data.status === 404) {
-            alert('Sorry, API error')
+        let countryData = await (await fetch(`https://restcountries.eu/rest/v2/name/${searchCountryName}`)).json();
+        if (countryData.status === 404) {
+            setSpin(null);
+            setCountry(null);
         } else {
-            // let {arrival, departure} = data.body;
-            console.log('data.body', data);
-            this.setState({data});
+            setSpin(null);
+            setCountry(countryData[0]);
         }
-    }
 
-    render() {
-        return (
-            <div>s</div>
-        )
-    }
+    };
+    const handlerChangeSearchCountryName = e => setSearchCountryName(e.target.value);
+    const onSearchByEnter = button => {
+        if (button.key === 'Enter' && searchCountryName !== undefined && searchCountryName !== '') {
+            getCountryData()
+        }
+    };
+
+    return (
+        <div>
+            <SearchCountry
+                getCountryData={getCountryData}
+                searchCountryName={searchCountryName}
+                handlerChangeSearchCountryName={handlerChangeSearchCountryName}
+                onSearchByEnter={onSearchByEnter}
+            />
+
+            {country ? <CountryDetails
+                country={country}
+                spin={spin}
+            /> : <EmptyDataCountry/>}
+        </div>
+    );
 }
-
-export default Country;
